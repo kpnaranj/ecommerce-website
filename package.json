@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Development of e-commerce-website",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server/index.js"
+  },
   "author": "Kevin Narsh",
   "license": "MIT",
   "dependencies": {
