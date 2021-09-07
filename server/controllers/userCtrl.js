@@ -91,7 +91,7 @@ const userCtrl = {
       if (!rf_token)
         return res.status(400).json({ msg: "Please Login or Register" });
 
-      jwt.verify(rf_token, process.env.REFRESH_ACCESS_TOKEN, (err, user) => {
+      jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err)
           return res.status(400).json({ msg: "Please Login or Register" });
 
@@ -103,6 +103,22 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  getUser: async (req, res) => {
+    try {
+      // Obtain user for id element
+      const user = await Users.findById(req.user.id).select("-password");
+      // If user does not exist send error
+      if (!user) {
+        return res
+          .status(400)
+          .json({ msg: "User does not exist.Please, try again" });
+      }
+      // if user exist then send information of user
+      res.json(user);
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
 };
 
 // Function create access token
@@ -110,7 +126,7 @@ const createAccessToken = (userId) => {
   return jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
 };
 const createRefreshToken = (userId) => {
-  return jwt.sign(userId, process.env.REFRESH_ACCESS_TOKEN, {
+  return jwt.sign(userId, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "7d",
   });
 };
