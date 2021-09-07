@@ -1,5 +1,6 @@
+// Private libraries
 const jwt = require("jsonwebtoken");
-
+// Authentication element
 const auth = (req, res, next) => {
   try {
     // Obtain autorization token of elements
