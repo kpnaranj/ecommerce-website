@@ -42,6 +42,41 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  login: async (req, res) => {
+    try {
+      // Destructure request body to obtain email and password
+      const { email, password } = req.body;
+      // Obtain user elements from given email
+      const user = await Users.findOne({ email });
+      // If user does not exist, we cannot login, return error
+      if (!user) {
+        return res
+          .status(400)
+          .json({ msg: "User does not exist. Please try again" });
+      }
+      // If user exist, then compare given password with existing
+      const isMatch = await bcrypt.compare(password, user.password);
+      // If there is no match, then user password is incorrect
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ msg: "Incorrect password. Please try again" });
+      }
+      // If match is true, then we create an acces and refresh token
+      // Create jsonwebtoken to authentication
+      const accessToken = createAccessToken({ id: user._id });
+      const refreshToken = createRefreshToken({ id: user._id });
+      // Send tokens to the cookie set
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        path: "/api/refresh_token",
+      });
+      // Everything is completed, send a success registration
+      res.json({ accessToken, msg: "Login Successful!" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
   refreshToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshToken;
