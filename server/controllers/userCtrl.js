@@ -77,25 +77,29 @@ const userCtrl = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  logout: async (req, res) => {
+    try {
+      res.clearCookie("refreshToken", { path: "/api/refresh_token" });
+      return res.json({ msg: "Logged out" });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
   refreshToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshToken;
-      // Check that the token exist, if not return an error
-      if (!rf_token) {
+      if (!rf_token)
         return res.status(400).json({ msg: "Please Login or Register" });
-      }
-      // If exist verify jwt with token and refresh access
+
       jwt.verify(rf_token, process.env.REFRESH_ACCESS_TOKEN, (err, user) => {
-        // If error display that user should login again
-        if (err) {
+        if (err)
           return res.status(400).json({ msg: "Please Login or Register" });
-        }
-        // If no error exist then store access token and send user token
-        const accessToken = createAccessToken({ id: user.id });
-        res.json({ accessToken });
+
+        const accesstoken = createAccessToken({ id: user.id });
+
+        res.json({ accesstoken });
       });
     } catch (err) {
-      // Catch error if there is an error in the server
       return res.status(500).json({ msg: err.message });
     }
   },
