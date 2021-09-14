@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 // Global Routes
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const uploadRoutes = require("./routes/upload");
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -25,6 +26,7 @@ app.use(fileupload({ useTempFiles: true }));
 }); */
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", uploadRoutes);
 // Listening server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
