@@ -1,0 +1,52 @@
+/*Root of Header*/
+header {
+  min-height: 70px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+/*Logo of Header*/
+header .logo {
+  /*When flex is 1 it sets up other 
+  elements to the end of section*/
+  flex: 1;
+}
+/*Content of header*/
+header a {
+  text-transform: uppercase;
+  color: #555;
+}
+/*List elements of header*/
+header ul li {
+  display: inline-block;
+  opacity: 0.7;
+  padding: 0 20px;
+}
+/* When element is hover */
+header ul li:hover {
+  opacity: 1;
+}
+/* Menu section - to show either cart or x */
+.menu {
+  display: none;
+}
+/* Cart icon */
+.cart-icon {
+  position: relative;
+  margin-right: 20px;
+}
+/*cart icon number up to cart element */
+.cart-icon span {
+  background: crimson;
+  border-radius: 20px;
+  color: white;
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  padding: 5px 7px;
+  font-size: 10px;
+}
