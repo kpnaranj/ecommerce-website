@@ -9,13 +9,14 @@ export default function ProductsAPI() {
   const getProducts = async () => {
     // Get the axios elements - Asyncronous calls
     const res = await axios.get("/api/products");
-    console.log(res.data.products);
+    // Finally obtain api products from data elements
+    setProducts(res.data.products);
   };
   // After render call to getProducts
   useEffect(() => {
     getProducts();
   }, []);
-  // Return state of elements from api
+  // Return data of elements to be used
   return { products: [products, setProducts] };
 }
 // This element will be imported to global state

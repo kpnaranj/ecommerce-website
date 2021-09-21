@@ -6,14 +6,15 @@ import ProductsAPI from "./api/ProductsAPI";
 const GlobalState = createContext();
 // DataProvider = export data elements to main function
 const DataProvider = ({ children }) => {
-  // Get products API in the data provider
-  ProductsAPI();
+  // Check if token element is provided for login session
+  const [token, setToken] = useState(false);
+  // Provide state of elements to be used
+  const state = {
+    token: [token, setToken],
+    ProductsAPI: ProductsAPI(),
+  };
   // Return gloabl state of elements
-  return (
-    <GlobalState.Provider value={"Value in Global"}>
-      {children}
-    </GlobalState.Provider>
-  );
+  return <GlobalState.Provider value={state}>{children}</GlobalState.Provider>;
 };
 // Export variables to main function
 export { GlobalState, DataProvider };
