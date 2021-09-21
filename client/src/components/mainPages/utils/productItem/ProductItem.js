@@ -16,7 +16,7 @@ export default function ProductItem({ product }) {
         {/* Product Price */}
         <span>${product.price}</span>
         {/* Product Description */}
-        <p>${product.description}</p>
+        <p>{product.description}</p>
       </div>
       {/* Set of buttons with different actions */}
       <div className="row_btn">

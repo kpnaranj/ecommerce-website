@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // Private Libraries
 import { GlobalState } from "../../../GlobalState";
-import ProductItem from "../../productItem/ProductItem";
+import ProductItem from "../utils/productItem/ProductItem";
 
 export default function Products() {
   // First, obtain state from context
