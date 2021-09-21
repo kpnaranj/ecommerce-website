@@ -1,5 +1,21 @@
-import React from "react";
+// Public Libraries
+import React, { useContext } from "react";
+// Private Libraries
+import { GlobalState } from "../../../GlobalState";
+import ProductItem from "../../productItem/ProductItem";
 
 export default function Products() {
-  return <div>Products List</div>;
+  // First, obtain state from context
+  const state = useContext(GlobalState);
+  // Get product elements from state
+  const [products] = state.productsAPI.products;
+  // Destructure elements
+  console.log(products);
+  return (
+    <div className="products">
+      {products.map((product) => {
+        return <ProductItem key={product._id} product={product} />;
+      })}
+    </div>
+  );
 }

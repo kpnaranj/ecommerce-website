@@ -11,7 +11,7 @@ const DataProvider = ({ children }) => {
   // Provide state of elements to be used
   const state = {
     token: [token, setToken],
-    ProductsAPI: ProductsAPI(),
+    productsAPI: ProductsAPI(),
   };
   // Return gloabl state of elements
   return <GlobalState.Provider value={state}>{children}</GlobalState.Provider>;
