@@ -1,6 +1,5 @@
 // Public imports
 import React from "react";
-import { Link } from "react-router-dom";
 // Private imports
 import BtnRender from "./BtnRender";
 // Function Product items - Create a single box of products
